@@ -19,11 +19,20 @@ typedef pair<int, int> Pii;
 const int inf = 0x3f3f3f3f;
 const LL infLL = 0x3f3f3f3f3f3f3f3fLL;
 
-int g[4][4];
+int a[16];
 
 int main()
 {
-        rep(i,4) rep(j,4) scanf("%d", &g[i][j]);
+        rep(i,16) scanf("%d", &a[i]);
+        int cnt = 0;
+        rep(i,16) {
+                if (a[i]) {
+                        rep(j,i) if (a[j] > a[i]) ++cnt;
+                } else if (i & 4) {
+                        ++cnt;
+                }
+        }
+        puts(cnt & 1? "YES": "NO");
 
         return 0;
 }
