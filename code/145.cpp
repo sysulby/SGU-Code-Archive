@@ -33,7 +33,7 @@ class Yen {
         int dis[maxn], pre[maxn];
         bool vis[maxn];
 
-        bool dijkstra(Path &ret, int d = 0)
+        bool dijkstra(Path &ret, int d)
         {
                 memset(pre, -1, sizeof(pre));
                 memset(vis, false, sizeof(vis));
@@ -68,7 +68,7 @@ class Yen {
 
         void add_edge(int u, int v, int w)
         {
-                this->w[u][v] = this->w[v][u] = w;
+                this->w[u][v] = w;
         }
 
         bool find_kth(int src, int trg, int k)
@@ -76,7 +76,7 @@ class Yen {
                 s = src, t = trg;
                 priority_queue<Path> que;
                 for (int u = 0; u < n; ++u) blc[u].reset();
-                if (!dijkstra(p)) return false;
+                if (!dijkstra(p, 0)) return false;
                 p.dev = 1; p.blc.set(p.v[1]); que.push(p);
                 for (int i = 0; i < k; ++i) {
                         if (que.empty()) return false;
@@ -92,8 +92,7 @@ class Yen {
                 }
                 printf("%d %d\n", p.w, (int)p.v.size());
                 for (int i = 0; i < p.v.size(); ++i)
-                        printf("%d ", p.v[i] + 1);
-                puts("");
+                        printf("%d%c", p.v[i] + 1, " \n"[i==p.v.size()-1]);
                 return true;
         }
 } grp;
